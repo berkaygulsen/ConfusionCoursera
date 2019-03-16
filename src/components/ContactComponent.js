@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, Label, Col, FormFeedback } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 class Contact extends Component {
@@ -12,10 +12,9 @@ class Contact extends Component {
   
 
 
-  handleSubmit(event) {
-    console.log('Current State is: ' + JSON.stringify(this.state));
-    alert('Current State is: ' + JSON.stringify(this.state));
-    event.preventDefault();
+  handleSubmit(values) {
+    console.log('Current State is: ' + JSON.stringify(values));
+    alert('Current State is: ' + JSON.stringify(values));
   }
 
 
@@ -53,7 +52,7 @@ class Contact extends Component {
               <div className="col-12 col-sm-11 offset-sm-1">
                   <div className="btn-group" role="group">
                       <a role="button" className="btn btn-primary" href="tel:+85212345678"><i className="fa fa-phone"></i> Call</a>
-                      <a role="button" className="btn btn-info" href="#"><i className="fa fa-skype"></i> Skype</a>
+                      <a role="button" className="btn btn-info" href="https://google.com"><i className="fa fa-skype"></i> Skype</a>
                       <a role="button" className="btn btn-success" href="mailto:confusion@food.net"><i className="fa fa-envelope-o"></i> Email</a>
                   </div>
               </div>
@@ -101,6 +100,7 @@ class Contact extends Component {
                   <Label htmlFor="email" md={2}>Email</Label>
                   <Col md={10}>
                     <Control.text 
+                      model=".email"
                       className="form-control"
                       type="email" 
                       id="email" 
@@ -123,19 +123,19 @@ class Contact extends Component {
                     </div>
                   </Col>
                   <Col md={{ size: 3, offset: 1}}>
-                    <Input onChange={this.handleInputChange} type="select" name="contactType" value={this.state.contactType}>
+                    <Control.select model=".contactType" name="contactType" className="form-control">
                       <option>Tel.</option>
                       <option>Email</option>
-                    </Input>
+                    </Control.select>
                   </Col>
                 </Row>
-                <Row className="form-group" row>
+                <Row className="form-group">
                   <Label htmlFor="message" md={2}>Your Feedback</Label>
                   <Col md={10}>
-                    <Input onChange={this.handleInputChange} type="textarea" id="message" name="message" rows="Email" value={this.state.message} />
+                    <Control.textarea model=".message" id="message" name="message" rows="12" className="form-control" />
                   </Col>
                 </Row>
-                <Row className="form-group" row>
+                <Row className="form-group">
                   <Col md={{ size:10, offset: 2}}>
                     <Button type="submit" color="primary" >Send Feedback</Button>
                   </Col>
